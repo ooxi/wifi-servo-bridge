@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Zlib
 #include <Arduino.h>
 
 #include <cstdint>

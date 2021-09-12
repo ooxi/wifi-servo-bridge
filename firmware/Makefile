@@ -1,6 +1,6 @@
+# SPDX-License-Identifier: Zlib
 FIRMWARE=WifiServoBridge
 FQBN=esp32:esp32:nodemcu-32s
-#FQBN=esp32:esp32:esp32
 TTY=/dev/ttyUSB0
 
 .PHONY: all

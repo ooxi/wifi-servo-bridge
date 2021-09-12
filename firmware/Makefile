@@ -13,7 +13,7 @@ all:				\
 .PHONY: install-dependencies
 install-dependencies:
 	arduino-cli --config-file 'arduino-cli.yaml' core update-index
-	arduino-cli core install 'esp32:esp32'
+	arduino-cli core install 'esp32:esp32@1.0.6'
 	arduino-cli lib install 'ESP32Servo@0.9.0'
 
 

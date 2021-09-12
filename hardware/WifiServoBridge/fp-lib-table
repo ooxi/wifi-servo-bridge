@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name WifiServoBridge)(type KiCad)(uri ${KIPRJMOD}/WifiServoBridge.pretty)(options "")(descr ""))
+)

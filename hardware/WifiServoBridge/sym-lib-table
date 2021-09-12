@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name WifiServoBridge)(type Legacy)(uri ${KIPRJMOD}/WifiServoBridge.lib)(options "")(descr ""))
+)

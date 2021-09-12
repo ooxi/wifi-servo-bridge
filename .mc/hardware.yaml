@@ -1,0 +1,35 @@
+---
+base: ubuntu:20.04
+install:
+ - software-properties-common
+---
+#!/bin/bash
+
+set -e
+
+
+# @see http://kicad-pcb.org/download/ubuntu/
+sudo add-apt-repository --yes ppa:kicad/kicad-5.1-releases
+sudo apt -y update
+sudo apt -y install		\
+	kicad			\
+	kicad-libraries		\
+	kicad-symbols		\
+	kicad-templates		\
+	kicad-footprints	\
+	kicad-packages3d
+
+
+# Jumping cursor
+#
+# Preferences / General Options / Controls / Center and warp cursor on zoom
+#
+# @warning The required configuration option is {@code ZoomNoCenter}, however
+#     KiCad rewrites the configuration file if {@code IconScale} is missing
+mkdir -p "${HOME}/.config/kicad"
+
+cat <<EOT >> "${HOME}/.config/kicad/kicad_common"
+ZoomNoCenter=1
+IconScale=0
+EOT
+

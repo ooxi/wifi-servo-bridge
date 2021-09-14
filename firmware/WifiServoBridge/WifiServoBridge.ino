@@ -19,7 +19,7 @@ static std::string const WIFI_PASSWORD{"***"};	// Replace with your Wifi passwor
 constexpr std::uint16_t WIFI_PORT{80};
 
 constexpr std::uint8_t PIN_DEBUG_LED{23};
-constexpr std::array<std::uint8_t, 6> PIN_SERVO{2, 4, 12, 13, 14, 15};
+constexpr std::array<std::uint8_t, 6> PIN_SERVO{5, 17, 16, 4, 2, 15};
 
 
 static WebServer httpd{WIFI_PORT};

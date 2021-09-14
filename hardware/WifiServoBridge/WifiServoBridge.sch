@@ -145,29 +145,29 @@ SERVO_GND
 Text GLabel 9800 5200 0    50   Input ~ 0
 SERVO_GND
 Text GLabel 9800 2500 0    50   Input ~ 0
-SERVO_A
+MCU_GPIO5
 Text GLabel 9800 3000 0    50   Input ~ 0
-SERVO_B
+MCU_GPIO17
 Text GLabel 9800 3500 0    50   Input ~ 0
-SERVO_C
+MCU_GPIO16
 Text GLabel 9800 4000 0    50   Input ~ 0
-SERVO_D
+MCU_GPIO4
 Text GLabel 9800 4500 0    50   Input ~ 0
-SERVO_E
+MCU_GPIO2
 Text GLabel 9800 5000 0    50   Input ~ 0
-SERVO_F
+MCU_GPIO15
 Text GLabel 5700 2550 2    50   Input ~ 0
-SERVO_A
+MCU_GPIO2
 Text GLabel 5700 2750 2    50   Input ~ 0
-SERVO_B
+MCU_GPIO4
 Text GLabel 5700 3450 2    50   Input ~ 0
-SERVO_D
+MCU_GPIO12
 Text GLabel 5700 3550 2    50   Input ~ 0
-SERVO_E
+MCU_GPIO13
 Text GLabel 5700 3650 2    50   Input ~ 0
-SERVO_F
+MCU_GPIO14
 Text GLabel 5700 2850 2    50   Input ~ 0
-SERVO_C
+MCU_GPIO5
 $Comp
 L Connector_Generic:Conn_01x19 J4
 U 1 1 613EA2C8
@@ -202,13 +202,13 @@ MCU_GPIO26
 Text GLabel 7300 3500 0    50   Input ~ 0
 MCU_GPIO27
 Text GLabel 7300 3600 0    50   Input ~ 0
-SERVO_F
+MCU_GPIO14
 Text GLabel 7300 3700 0    50   Input ~ 0
-SERVO_D
+MCU_GPIO12
 Text GLabel 7300 3800 0    50   Input ~ 0
 MCU_GND
 Text GLabel 7300 3900 0    50   Input ~ 0
-SERVO_E
+MCU_GPIO13
 Text GLabel 7300 4000 0    50   Input ~ 0
 MCU_GPIO9
 Text GLabel 7300 4100 0    50   Input ~ 0
@@ -234,17 +234,17 @@ MCU_GPIO19
 Text GLabel 8400 3300 2    50   Input ~ 0
 MCU_GPIO18
 Text GLabel 8400 3400 2    50   Input ~ 0
-SERVO_C
+MCU_GPIO5
 Text GLabel 8400 3500 2    50   Input ~ 0
 MCU_GPIO17
 Text GLabel 8400 3600 2    50   Input ~ 0
 MCU_GPIO16
 Text GLabel 8400 3700 2    50   Input ~ 0
-SERVO_B
+MCU_GPIO4
 Text GLabel 8400 3800 2    50   Input ~ 0
 MCU_GPIO0
 Text GLabel 8400 3900 2    50   Input ~ 0
-SERVO_A
+MCU_GPIO2
 Text GLabel 8400 4000 2    50   Input ~ 0
 MCU_GPIO15
 Text GLabel 8400 4300 2    50   Input ~ 0

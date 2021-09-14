@@ -4,7 +4,7 @@ Sample [firmware](firmware/WifiServoBridge/WifiServoBridge.ino) and
 [hardware](hardware/WifiServoBridge) showing of how to utilize ESP32 for driving
 servo motors controlled over Wifi.
 
-![Wifi Servo Bridge 2021-09-10](hardware/WifiServoBridge/2021-09-10/WifiServoBridge.png)
+![Wifi Servo Bridge 2021-09-14](hardware/WifiServoBridge/2021-09-14/WifiServoBridge.png)
 
 
 ## Quickstart

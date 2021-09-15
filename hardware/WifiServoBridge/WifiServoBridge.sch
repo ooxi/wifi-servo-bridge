@@ -422,4 +422,10 @@ Wire Wire Line
 	8200 6050 8400 6050
 Wire Wire Line
 	8200 4950 8400 4950
+Text GLabel 3200 3300 0    50   Input ~ 0
+SERVO_GND
+Text GLabel 3350 3300 2    50   Input ~ 0
+MCU_GND
+Wire Wire Line
+	3200 3300 3350 3300
 $EndSCHEMATC

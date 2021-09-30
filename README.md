@@ -26,9 +26,9 @@ See also [dedicated firmware README](firmware/README.md)
   on serial connection)
 
 ```bash
-curl -X GET http://wifi-servo-bridge/v1/servo/0		# Read angle of servo 0
-curl -X PUT http://wifi-servo-bridge/v1/servo/1/90	# Move servo 0 to angle 90°
-curl -X PUT http://wifi-servo-bridge/v1/servo/4/180	# Move servo 4 to angle 180°
-curl -X PUT http://wifi-servo-bridge/v1/servo/5/0	# Move servo 5 to angle 0°
+curl -X GET http://wifi-servo-bridge/v2/servo/A		# Read angle of servo E
+curl -X PUT http://wifi-servo-bridge/v2/servo/B/90	# Move servo B to angle 90°
+curl -X PUT http://wifi-servo-bridge/v2/servo/E/180	# Move servo E to angle 180°
+curl -X PUT http://wifi-servo-bridge/v2/servo/F/0	# Move servo F to angle 0°
 ```
 

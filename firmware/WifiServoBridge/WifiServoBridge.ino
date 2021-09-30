@@ -4,22 +4,36 @@
 #include <WebServer.h>
 #include <WiFi.h>
 
-/* @warning Should be available through espressif's WebServer library but cannot
- *     be found
+/* @warning `UriBraces.h' should be available through espressif's WebServer
+ *     library but cannot be found
  */
+#include "vendor/optional.hpp"
 #include "vendor/UriBraces.h"
 
 #include <array>
 #include <cstdint>
 #include <string>
+#include <utility>
 
+
+struct ServoConfig {
+	char const* name;
+	std::uint8_t pin;
+};
 
 static std::string const WIFI_SSID{"***"};	// Replace with your Wifi SSID
 static std::string const WIFI_PASSWORD{"***"};	// Replace with your Wifi password
 constexpr std::uint16_t WIFI_PORT{80};
 
 constexpr std::uint8_t PIN_DEBUG_LED{23};
-constexpr std::array<std::uint8_t, 6> PIN_SERVO{5, 17, 16, 4, 2, 15};
+constexpr std::array<ServoConfig, 6> PIN_SERVO{
+	ServoConfig{"A", 5},
+	ServoConfig{"B", 17},
+	ServoConfig{"C", 16},
+	ServoConfig{"D", 4},
+	ServoConfig{"E", 2},
+	ServoConfig{"F", 15},
+};
 
 
 static WebServer httpd{WIFI_PORT};
@@ -55,11 +69,27 @@ static void handleGetRoot() {
 
 
 /**
+ * @return Index of servo by name iff name is valid
+ */
+static tl::optional<std::size_t> getServoIdxFromName(String const& expectedName) {
+	for (std::size_t idx = 0; idx < PIN_SERVO.size(); ++idx) {
+		String const actualName{PIN_SERVO.at(idx).name};
+
+		if (actualName.equals(expectedName)) {
+			return idx;
+		}
+	}
+
+	return tl::nullopt;
+}
+
+
+/**
  * Reads back the servo position last set by this firmware
  *
- * GET /v1/servo/$servo/
+ * GET /v2/servo/$servo/
  *
- * @param $servo Servo number to read position from
+ * @param $servo Servo name to read position from
  *
  * @warning Might _not_ be the physical servo position!
  */
@@ -67,19 +97,14 @@ static void handleGetServo() {
 	constexpr auto HTTP_OK{200};
 	constexpr auto HTTP_BAD_REQUEST{400};
 
-	/* @warning Unfortunately Arduino's String::toInt cannot differentiate
-	 *     between "Cannot parse" and "successfully parsed zero"
-	 *
-	 *     Moreover std::stoul is not available 😑
-	 */
-	auto const servoIdx = httpd.pathArg(0).toInt();
+	auto const servoIdx = getServoIdxFromName(httpd.pathArg(0));
 
-	if ((servoIdx < 0) || (servoIdx >= servos.size())) {
-		httpd.send(HTTP_BAD_REQUEST, "text/plain", "Invalid servo index\n");
+	if (!servoIdx.has_value()) {
+		httpd.send(HTTP_BAD_REQUEST, "text/plain", "Invalid servo name\n");
 		return;
 	}
 
-	auto const position = servos.at(servoIdx).read();
+	auto const position = servos.at(servoIdx.value()).read();
 	httpd.send(HTTP_OK, "application/json", String(position));
 }
 
@@ -87,20 +112,20 @@ static void handleGetServo() {
 /**
  * Move servo to angle
  *
- * PUT /v1/servo/$servo/$angle
+ * PUT /v2/servo/$servo/$angle
  *
- * @param $servo Servo number to write position to
+ * @param $servo Servo name to write position to
  * @param $angle Desired server angle (0 - 180)
  */
 static void handlePutServo() {
 	constexpr auto HTTP_OK{200};
 	constexpr auto HTTP_BAD_REQUEST{400};
 
-	auto const servoIdx = httpd.pathArg(0).toInt();
+	auto const servoIdx = getServoIdxFromName(httpd.pathArg(0));
 	auto const angle = httpd.pathArg(1).toInt();
 
-	if ((servoIdx < 0) || (servoIdx >= servos.size())) {
-		httpd.send(HTTP_BAD_REQUEST, "text/plain", "Invalid servo index\n");
+	if (!servoIdx.has_value()) {
+		httpd.send(HTTP_BAD_REQUEST, "text/plain", "Invalid servo name\n");
 		return;
 	}
 
@@ -109,8 +134,8 @@ static void handlePutServo() {
 		return;
 	}
 
-	servos.at(servoIdx).write(angle);
-	auto const position = servos.at(servoIdx).read();
+	servos.at(servoIdx.value()).write(angle);
+	auto const position = servos.at(servoIdx.value()).read();
 	httpd.send(HTTP_OK, "application/json", String(position));
 }
 
@@ -138,7 +163,7 @@ void setup() {
 	}
 
 	for (auto i = 0; i < servos.size(); ++i) {
-		auto const result = servos.at(i).attach(PIN_SERVO.at(i));
+		auto const result = servos.at(i).attach(PIN_SERVO.at(i).pin);
 
 		if (0 == result) {
 			loopError("Failed attaching servo to pin");
@@ -177,8 +202,8 @@ void setup() {
 	httpd.begin();
 
 	httpd.on("/", HTTP_GET, handleGetRoot);
-	httpd.on(UriBraces{"/v1/servo/{}/"}, HTTP_GET, handleGetServo);
-	httpd.on(UriBraces{"/v1/servo/{}/{}"}, HTTP_PUT, handlePutServo);
+	httpd.on(UriBraces{"/v2/servo/{}/"}, HTTP_GET, handleGetServo);
+	httpd.on(UriBraces{"/v2/servo/{}/{}"}, HTTP_PUT, handlePutServo);
 
 
 	/* Signal the user that the application is up and running

@@ -1,0 +1,9 @@
+---
+base: ubuntu:20.04
+install:
+ - golang
+ - make
+publish:
+ - 8080:8080
+---
+

@@ -23,6 +23,8 @@ mc firmware make FIRMWARE=Blinky upload
 
 The debug LED connected to pin 23 should now be blinking
 
+[Blinky]: https://github.com/ooxi/wifi-servo-bridge/blob/main/firmware/Blinky/Blinky.ino
+
 
 ### `serial.serialutil.SerialException: [Errno 13] could not open port /dev/ttyUSB0: [Errno 13] Permission denied: '/dev/ttyUSB0'`
 

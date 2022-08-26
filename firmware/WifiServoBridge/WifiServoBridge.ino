@@ -21,8 +21,8 @@ struct ServoConfig {
 	std::uint8_t pin;
 };
 
-static std::string const WIFI_SSID{"***"};	// Replace with your Wifi SSID
-static std::string const WIFI_PASSWORD{"***"};	// Replace with your Wifi password
+static std::string const WIFI_SSID{"********"};		// Replace with your Wifi SSID
+static std::string const WIFI_PASSWORD{"********"};	// Replace with your Wifi password
 constexpr std::uint16_t WIFI_PORT{80};
 
 constexpr std::uint8_t PIN_DEBUG_LED{23};
@@ -179,6 +179,18 @@ void setup() {
 	}
 
 
+#if defined(WIFI_SERVO_BRIDGE_BEHAVE_AS_ACCESS_POINT) && !defined(WIFI_SERVO_BRIDGE_BEHAVE_AS_CLIENT)
+
+	/* Create a Wifi Access Point
+	 */
+	Serial.println(("Creating AP " + WIFI_SSID).c_str());
+	WiFi.softAP(WIFI_SSID.c_str(), WIFI_PASSWORD.c_str());
+
+	Serial.print("WiFi connected @ ");
+	Serial.println(WiFi.softAPIP());
+
+#elif defined(WIFI_SERVO_BRIDGE_BEHAVE_AS_CLIENT) && !defined(WIFI_SERVO_BRIDGE_BEHAVE_AS_ACCESS_POINT)
+
 	/* Connect to specified Wifi
 	 */
 	Serial.println(("Connecting to " + WIFI_SSID).c_str());
@@ -195,6 +207,9 @@ void setup() {
 	Serial.println("");
 	Serial.print("WiFi connected @ ");
 	Serial.println(WiFi.localIP());
+#else
+	#error WifiServoBridge must behave either as access point or as client
+#endif
 
 
 	/* Initialize HTTP server

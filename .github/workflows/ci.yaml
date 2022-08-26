@@ -19,6 +19,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build firmware
-      run: npx --package mini-cross@0.15.2 mc --no-tty firmware make -C firmware
+    - name: Build Blinky firmware
+      run: npx --package mini-cross@0.15.2 mc --no-tty firmware make -C firmware FIRMWARE=Blinky
+
+    - name: Build WifiServoBridge (AP) firmware
+      run: npx --package mini-cross@0.15.2 mc --no-tty firmware make -C firmware FIRMWARE=WifiServoBridge BUILD_EXTRA_FLAGS=-DWIFI_SERVO_BRIDGE_BEHAVE_AS_ACCESS_POINT
+
+    - name: Build WifiServoBridge (Client) firmware
+      run: npx --package mini-cross@0.15.2 mc --no-tty firmware make -C firmware FIRMWARE=WifiServoBridge BUILD_EXTRA_FLAGS=-DWIFI_SERVO_BRIDGE_BEHAVE_AS_CLIENT
 

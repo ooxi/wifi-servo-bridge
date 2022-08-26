@@ -45,3 +45,11 @@ Connecting........_____..
 try holding the «BOOT» or «PROG» button and press the «RST» or «EN» button. The
 ESP32 should enter bootloader mode and accept the firmware coming in.
 
+
+### How to switch WifiServoBridge between Access Point and Client behaviour
+
+```
+mc firmware make FIRMWARE=WifiServoBridge BUILD_EXTRA_FLAGS=-DWIFI_SERVO_BRIDGE_BEHAVE_AS_ACCESS_POINT
+mc firmware make FIRMWARE=WifiServoBridge BUILD_EXTRA_FLAGS=-DWIFI_SERVO_BRIDGE_BEHAVE_AS_CLIENT
+```
+

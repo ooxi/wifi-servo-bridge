@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Zlib
 FIRMWARE=WifiServoBridge
+BUILD_EXTRA_FLAGS=-DWIFI_SERVO_BRIDGE_BEHAVE_AS_ACCESS_POINT
 FQBN=esp32:esp32:nodemcu-32s
 TTY=/dev/ttyUSB0
 
@@ -26,7 +27,7 @@ clean:
 
 .PHONY: build
 build:
-	arduino-cli compile --fqbn '$(FQBN)' --output-dir 'build' '$(FIRMWARE)'
+	arduino-cli compile --fqbn '$(FQBN)' --output-dir 'build' --build-property 'build.extra_flags=$(BUILD_EXTRA_FLAGS)' '$(FIRMWARE)'
 
 
 .PHONY: upload

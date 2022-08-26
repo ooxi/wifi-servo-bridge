@@ -1,5 +1,5 @@
 ---
-base: ubuntu:20.04
+base: ubuntu:22.04
 install:
 
  # Setup
@@ -21,7 +21,7 @@ set -e
 # Install latest release of arduino-cli as base
 #
 # @see https://github.com/arduino/arduino-cli
-ARDUINO_CLI_VERSION='0.19.0'
+ARDUINO_CLI_VERSION='0.26.0'
 ARDUINO_CLI_URL="https://github.com/arduino/arduino-cli/releases/download/${ARDUINO_CLI_VERSION}/arduino-cli_${ARDUINO_CLI_VERSION}_Linux_64bit.tar.gz"
 
 curl --location --output '/tmp/arduino-cli.tar.gz' "${ARDUINO_CLI_URL}"

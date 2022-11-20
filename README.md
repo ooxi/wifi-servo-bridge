@@ -1,4 +1,4 @@
-# Wifi Servo Bridge
+# Wifi Servo Bridge ![Build Status](https://github.com/ooxi/wifi-servo-bridge/actions/workflows/ci.yaml/badge.svg)
 
 Sample [firmware](firmware/WifiServoBridge/WifiServoBridge.ino) and
 [hardware](hardware/WifiServoBridge) showing of how to utilize ESP32 for driving

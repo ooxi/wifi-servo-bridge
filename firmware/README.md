@@ -28,7 +28,7 @@ The debug LED connected to pin 23 should now be blinking
 
 ### `serial.serialutil.SerialException: [Errno 13] could not open port /dev/ttyUSB0: [Errno 13] Permission denied: '/dev/ttyUSB0'`
 
-* Check that your ESP32 is connected via `/dev/ttyUSB` (you can change `TTY` in [Makefile][Makefile])
+* Check that your ESP32 is connected via `/dev/ttyUSB0` (you can change `TTY` in [Makefile][Makefile])
 * Check that your user has read/write permissions on `/dev/ttyUSB0`
 * Check that the `/dev/ttyUSB0` device is forwarded to the docker container via `--device /dev/ttyUSB0`
 

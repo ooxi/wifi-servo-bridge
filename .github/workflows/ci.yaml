@@ -4,8 +4,6 @@ name: CI
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '30 5 15 * *'
 
 
 jobs:
